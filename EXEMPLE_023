@@ -1,0 +1,74 @@
+Дата: 17.01.2026
+
+Название:
+EXAMPLE_023 — Escalation Protocol
+
+Решение:
+Зафиксировать протокол эскалации для состояний REVIEW и HOLD.
+
+Назначение:
+EXAMPLE_023 определяет, когда Execution обязан перейти на более высокий уровень принятия решения.
+
+Условия эскалации:
+
+E1 — REVIEW Timeout
+— Execution находится в REVIEW дольше допустимого окна;
+— решение не принято;
+— стратегия не обновлена.
+
+E2 — HOLD Stagnation
+— Execution в HOLD без изменения входных данных;
+— причина HOLD устранена частично или не устранена;
+— повторная попытка невозможна без решения сверху.
+
+E3 — Repeated Conflict
+— повторяющийся Strategy Conflict;
+— локальное решение не устраняет источник;
+— конфликт воспроизводим.
+
+Уровни эскалации:
+
+L1 — Strategy Clarification
+— возврат в Strategy Layer;
+— уточнение или обновление Strategy Gate.
+
+L2 — Governance Review
+— подключение Governance Agent;
+— проверка соответствия правилам OS.
+
+L3 — OS-Level Decision
+— фиксация решения на уровне Execution OS;
+— возможна модификация правил (не в LIVE MODE).
+
+Право инициировать эскалацию:
+— Execution Owner;
+— Strategy Layer;
+— Governance Agent.
+
+Запреты:
+— ручное «проталкивание» без эскалации;
+— бесконечный REVIEW;
+— HOLD без таймера.
+
+Поведение Execution OS:
+— при эскалации слот остаётся занятым;
+— Execution не продолжается без решения;
+— результат эскалации фиксируется явно.
+
+Изменение Escalation Protocol:
+— только через Execution Review Loop;
+— оформляется как новая версия Execution OS;
+— в LIVE MODE запрещено.
+
+Принцип:
+Execution OS не застревает.
+Execution OS поднимает уровень.
+Execution OS решает, а не ждёт.
+
+Артефакт:
+GitHub: EXAMPLE_023.md (execution-os)
+
+Статус:
+ACTIVE
+
+Escalation Protocol зафиксирован.
