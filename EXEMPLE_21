@@ -1,0 +1,89 @@
+Дата: 17.01.2026
+
+Название:
+EXAMPLE_021 — Execution State Machine
+
+Решение:
+Зафиксировать конечный автомат состояний Execution с допустимыми переходами.
+
+Назначение:
+EXAMPLE_021 устраняет размытые статусы и вводит строгую логику движения задачи от входа до завершения.
+
+Допустимые состояния Execution:
+
+RAW
+— входящий сигнал;
+— не является задачей;
+— не занимает Execution Slot.
+
+READY
+— задача оформлена;
+— Execution Owner назначен;
+— слот выделен;
+— ожидание старта.
+
+ACTIVE
+— исполнение запущено;
+— слот занят;
+— Execution Owner удерживает контур.
+
+HOLD
+— исполнение приостановлено;
+— слот ЗАНЯТ;
+— причина HOLD зафиксирована.
+
+REVIEW
+— выполнение остановлено;
+— требуется решение вне LIVE MODE;
+— слот остаётся занятым.
+
+DONE
+— задача фактически завершена;
+— результат подтверждён;
+— слот освобождается.
+
+Запрещённые состояния:
+— ALMOST DONE;
+— IN PROGRESS WITHOUT OWNER;
+— WAITING FOR MOTIVATION;
+— BACKGROUND EXECUTION.
+
+Допустимые переходы:
+
+RAW → READY  
+READY → ACTIVE  
+ACTIVE → HOLD  
+ACTIVE → REVIEW  
+HOLD → ACTIVE  
+REVIEW → ACTIVE  
+ACTIVE → DONE  
+
+Запрещённые переходы:
+— RAW → ACTIVE;
+— READY → DONE;
+— HOLD → DONE;
+— REVIEW → DONE;
+— любое состояние → ACTIVE без Owner.
+
+Контроль переходов:
+— инициируются Execution Owner;
+— фиксируются явно;
+— не происходят автоматически.
+
+Изменение State Machine:
+— возможно только через Execution Review Loop;
+— оформляется как новая версия Execution OS;
+— в LIVE MODE запрещено.
+
+Принцип:
+Execution OS движется по состояниям.
+Execution OS не «проскальзывает».
+Execution OS останавливается, если форма нарушена.
+
+Артефакт:
+GitHub: EXAMPLE_021.md (execution-os)
+
+Статус:
+ACTIVE
+
+Execution State Machine зафиксирован.
