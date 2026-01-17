@@ -1,0 +1,77 @@
+Дата: 17.01.2026
+
+Название:
+EXAMPLE_026 — Minimal LIVE MODE Ruleset (Go-Live Gate)
+
+Решение:
+Зафиксировать минимальный набор правил, при котором Execution OS допускается в LIVE MODE.
+
+Назначение:
+EXAMPLE_026 определяет:
+— условия входа в LIVE MODE,
+— разрешённые действия,
+— запреты,
+— обязательные артефакты,
+— правила остановки LIVE MODE.
+
+Определение:
+LIVE MODE = исполнение реальных задач в активной среде.
+LIVE MODE требует максимальной строгости формы.
+
+Условия входа (Go-Live Preconditions):
+— Strategy-to-Execution Gate активен (EXAMPLE_017);
+— Execution Intake нормализован (EXAMPLE_018);
+— Execution Slots зафиксированы (EXAMPLE_019);
+— Execution Ownership зафиксирован (EXAMPLE_020);
+— Execution State Machine зафиксирован (EXAMPLE_021);
+— Interruption Policy зафиксирована (EXAMPLE_022);
+— Escalation Protocol зафиксирован (EXAMPLE_023);
+— Completion Criteria (DONE) зафиксированы (EXAMPLE_024);
+— Execution Review Loop зафиксирован (EXAMPLE_025).
+
+Разрешено в LIVE MODE:
+— запускать Execution только через Intake;
+— держать активными только задачи в пределах Slot-лимита;
+— менять состояние задач только Owner'ом;
+— фиксировать DONE только при наличии артефакта;
+— выполнять Review после DONE/FAIL/ESCALATION.
+
+Запрещено в LIVE MODE:
+— любые изменения правил Execution OS "на лету";
+— расширение числа слотов "по необходимости";
+— DONE без артефакта;
+— Execution без Owner;
+— параллельная работа вне слотов;
+— запуск задач "на будущее" без Strategy фиксации;
+— интерпретация сигналов без нормализации Intake.
+
+Стоп-сигналы (Emergency Stop):
+LIVE MODE немедленно ставится на HOLD, если:
+— нарушен Slot-лимит;
+— найден Execution без Owner;
+— обнаружен обход Strategy Gate;
+— выполнен автоматический DONE;
+— изменены правила без Review Loop.
+
+Поведение Execution OS:
+— LIVE MODE работает только по форме;
+— при нарушении формы Execution не продолжается;
+— восстановление LIVE MODE возможно только после Review и явного решения.
+
+Изменение LIVE MODE Ruleset:
+— только через Execution Review Loop;
+— оформляется как новая версия Execution OS;
+— в LIVE MODE запрещено.
+
+Принцип:
+LIVE MODE не про скорость.
+LIVE MODE про управляемость.
+Execution OS защищает реальность от хаоса.
+
+Артефакт:
+GitHub: EXAMPLE_026.md (execution-os)
+
+Статус:
+ACTIVE
+
+LIVE MODE Ruleset зафиксирован.
